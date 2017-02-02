@@ -1,1 +1,32 @@
+<table>
+<%= form_for @post do |f| %>
+  <tr>
+    <td>title:</td>
+    <td><%= f.text_field :title %></td>
+  </tr>
+  <tr>
+    <td>content:</td>
+    <td><%= f.text_field :content %></td>
+  </tr>
+  <tr>
+    <td>Categories: </td>
+    <td><%= f.collection_check_boxes :category_ids, Category.all, :id, :name %></td>
+  </tr>
+  <tr>
+    <td>New Category: </td>
+    <td>
+      <%= f.fields_for :categories, post.categories.build do |category_fields| %>
+        <%= category_fields.text_field :name %>
+      <% end %>
+    </td>
+  </tr>
 
+
+
+
+
+  <tr>
+    <td colspan="2"><%= f.submit style: "float:right;"%></td>
+  </tr>
+<% end %>
+</table>
